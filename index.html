@@ -8,9 +8,124 @@
   </head>
   <!-- Currently, Tailwind already implemented 100dvh as one of its class, I am using the h-[100dvh] just as an example of how to use 'arbitrary values' -->
   <body class="grid grid-cols-3 grid-rows-2 h-[100dvh]">
-    <aside class="bg-amber-700 row-span-2">
-      <h1>Hello world!</h1>
-      <h2>Lucas</h2>
+    <aside
+      class="row-span-2 bg-emerald-300 flex flex-col justify-between py-5 px-2"
+    >
+      <h1 class="text-2xl font-bold px-6">Your Investment</h1>
+      <form class="w-full">
+        <div class="flex w-full flex-col px-6 my-2">
+          <label for="starting-amount" class="font-bold text-gray-700"
+            >Initial Amount</label
+          >
+          <div class="flex">
+            <input
+              value="$"
+              class="w-1/6 text-center rounded-l-lg"
+              type="text"
+              disabled
+            />
+            <input
+              type="text"
+              class="w-5/6 rounded-r-lg px-2"
+              id="starting-amount"
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+        <div class="flex w-full flex-col px-6 my-2">
+          <label for="additional-contribution" class="font-bold text-gray-700"
+            >Monthly Contributions</label
+          >
+          <div class="flex">
+            <input
+              value="$"
+              class="w-1/6 text-center rounded-l-lg"
+              type="text"
+              disabled
+            />
+            <input
+              type="text"
+              class="w-5/6 rounded-r-lg px-2"
+              placeholder="0.00"
+              id="additional-contribution"
+            />
+          </div>
+        </div>
+        <div class="flex w-full flex-col px-6 my-2">
+          <label for="time-amount" class="font-bold text-gray-700">Time</label>
+          <div class="flex">
+            <input
+              type="text"
+              class="w-4/6 rounded-l-lg px-2"
+              id="time-amount"
+            />
+            <select
+              id="time-amount-period"
+              class="w-2/6 rounded-r-lg text-center border-l-2 border-emerald-600 hover:bg-emerald-950 hover:text-emerald-50"
+            >
+              <option value="monthly">Months</option>
+              <option value="annualy">Years</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex w-full flex-col px-6 my-2">
+          <label for="return-rate" class="font-bold text-gray-700"
+            >Profitability</label
+          >
+          <div class="flex">
+            <input
+              value="%"
+              class="w-1/6 text-center rounded-l-lg"
+              type="text"
+              disabled
+            />
+            <input
+              type="text"
+              class="w-3/6 px-2"
+              placeholder="0"
+              id="return-rate"
+            />
+            <select
+              id="evaluation-period"
+              class="w-2/6 rounded-r-lg text-center border-l-2 border-emerald-600 hover:bg-emerald-950 hover:text-emerald-50"
+            >
+              <option value="monthly">Monthly</option>
+              <option value="annualy">Annualy</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex w-full flex-col px-6 my-2">
+          <label for="tax-rate" class="font-bold text-gray-700"
+            >Profitability Fee</label
+          >
+          <div class="flex">
+            <input
+              value="%"
+              class="w-1/6 text-center rounded-l-lg"
+              type="text"
+              disabled
+            />
+            <input
+              type="text"
+              class="w-5/6 rounded-r-lg px-2"
+              placeholder="0"
+              id="tax-rate"
+            />
+          </div>
+        </div>
+      </form>
+      <div class="flex h-12 px-6 my-8 w-full gap-2">
+        <button
+          class="w-1/2 rounded-lg bg-emerald-950 text-emerald-50 hover:bg-emerald-800"
+        >
+          Calcule
+        </button>
+        <button
+          class="w-1/2 rounded-lg hover:bg-emerald-80 hover:bg-emerald-200"
+        >
+          Clear
+        </button>
+      </div>
     </aside>
     <main class="bg-amber-100 col-span-2 row-span-2">
       <p>Results:</p>
