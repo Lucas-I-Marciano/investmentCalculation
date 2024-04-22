@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* With a layer I could define a class to apply more classes on my html tag */
+@layer utilities {
+  .error {
+    @apply border-2;
+    @apply border-red-500;
+    @apply rounded-lg;
+  }
+}
