@@ -24,5 +24,8 @@ function renderProgression() {
   console.log(returnsArray);
 }
 
-const buttonCalculate = document.getElementById("calculate-result");
-buttonCalculate.addEventListener("click", renderProgression);
+const investmentForm = document.getElementById("investment-form");
+investmentForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  renderProgression();
+});

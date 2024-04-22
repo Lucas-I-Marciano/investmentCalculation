@@ -12,7 +12,8 @@
       class="row-span-2 bg-emerald-300 flex flex-col justify-between py-5 px-2"
     >
       <h1 class="text-2xl font-bold px-6">Your Investment</h1>
-      <form class="w-full">
+      <!-- With the id of the form I could associate a button outside the form with it -->
+      <form id="investment-form" class="w-full">
         <div class="flex w-full flex-col px-6 my-2">
           <label for="starting-amount" class="font-bold text-gray-700"
             >Initial Amount</label
@@ -29,6 +30,7 @@
               class="w-5/6 rounded-r-lg px-2"
               id="starting-amount"
               placeholder="0.00"
+              required
             />
           </div>
         </div>
@@ -58,6 +60,7 @@
               type="text"
               class="w-4/6 rounded-l-lg px-2"
               id="time-amount"
+              required
             />
             <select
               id="time-amount-period"
@@ -84,6 +87,7 @@
               class="w-3/6 px-2"
               placeholder="0"
               id="return-rate"
+              required
             />
             <select
               id="evaluation-period"
@@ -110,6 +114,7 @@
               class="w-5/6 rounded-r-lg px-2"
               placeholder="0"
               id="tax-rate"
+              required
             />
           </div>
         </div>
@@ -118,6 +123,7 @@
         <button
           id="calculate-result"
           class="w-1/2 rounded-lg bg-emerald-950 text-emerald-50 hover:bg-emerald-800"
+          form="investment-form"
         >
           Calcule
         </button>
