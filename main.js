@@ -167,7 +167,7 @@ function validateInput(event) {
 const investmentForm = document.getElementById("investment-form");
 investmentForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  renderProgression();
+  // renderProgression();
 });
 
 for (const formElement of investmentForm) {
