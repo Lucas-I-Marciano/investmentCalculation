@@ -142,8 +142,17 @@
         </button>
       </div>
     </aside>
-    <main class="bg-amber-100 col-span-2 row-span-2">
-      <p>Results:</p>
+    <main class="h-full">
+      <section id="charts-container">
+        <div class="h-[36dvh]">
+          <p>Final Result</p>
+          <canvas id="final-money-distribution"></canvas>
+        </div>
+        <div class="h-[56dvh]">
+          <p>Progression</p>
+          <canvas id="progression"></canvas>
+        </div>
+      </section>
     </main>
     <script type="module" src="./main.js"></script>
   </body>

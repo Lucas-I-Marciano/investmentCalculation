@@ -1,10 +1,18 @@
 import { generateReturnArray } from "./src/investmentGoals";
+import { Chart } from "chart.js/auto";
+
+function formatCurrency(value) {
+  return value.toFixed(2);
+}
 
 function renderProgression() {
   // Preventing my function to run if some filds contains error
   if (document.querySelector(".error")) {
     return;
   }
+  // Reseting my chart to update it
+  resetCharts();
+
   const startingAmount = Number(
     document.getElementById("starting-amount").value.replace(",", ".")
   );
@@ -29,7 +37,84 @@ function renderProgression() {
     returnRate,
     returnRatePeriod
   );
-  console.log(returnsArray);
+  console.log(returnsArray.slice(-1));
+  const finalInvestmentObject = returnsArray.slice(-1)[0];
+
+  doughnutChartReference = new Chart(finalMoneyChart, {
+    type: "doughnut",
+    data: {
+      labels: ["Total Invested", "Profitability", "Tax"],
+      datasets: [
+        {
+          data: [
+            formatCurrency(finalInvestmentObject["investedAmount"]),
+            formatCurrency(
+              finalInvestmentObject["totalInterestReturns"] *
+                (1 - taxRate / 100)
+            ),
+            formatCurrency(
+              finalInvestmentObject["totalInterestReturns"] * (taxRate / 100)
+            ),
+          ],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)",
+            "rgb(255, 205, 86)",
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    },
+  });
+
+  progressionChartReference = new Chart(progressionChart, {
+    type: "bar",
+    data: {
+      labels: returnsArray.map((investmentObject) => investmentObject.month),
+      datasets: [
+        {
+          label: "Total Invested",
+          data: returnsArray.map((investmentObject) =>
+            formatCurrency(investmentObject.investedAmount)
+          ),
+          backgroundColor: "rgb(255, 99, 132)",
+        },
+        {
+          label: "Return",
+          data: returnsArray.map((investmentObject) =>
+            formatCurrency(investmentObject.interestReturns)
+          ),
+          backgroundColor: "rgb(54, 162, 235)",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true,
+        },
+      },
+    },
+  });
+}
+
+function isObjectEmpty(object) {
+  // It will return no keys if empty
+  return Object.keys(object).length === 0;
+}
+
+function resetCharts() {
+  if (
+    !isObjectEmpty(doughnutChartReference) &&
+    !isObjectEmpty(progressionChartReference)
+  ) {
+    doughnutChartReference.destroy();
+    progressionChartReference.destroy();
+  }
 }
 
 function clearForm() {
@@ -45,6 +130,8 @@ function clearForm() {
     errorInputContainer.classList.remove("error");
     errorInputContainer.parentElement.querySelector("p").remove();
   }
+
+  resetCharts();
   // console.log(document.querySelectorAll(".error"));
 }
 
@@ -91,3 +178,8 @@ for (const formElement of investmentForm) {
 
 const buttonClear = document.getElementById("clear-form");
 buttonClear.addEventListener("click", clearForm);
+
+const finalMoneyChart = document.getElementById("final-money-distribution");
+const progressionChart = document.getElementById("progression");
+let progressionChartReference = {};
+let doughnutChartReference = {};
