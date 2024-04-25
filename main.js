@@ -10,6 +10,33 @@ function formatCurrencyToChart(value) {
   return value.toFixed(2);
 }
 
+let progressionChartReference = {};
+let doughnutChartReference = {};
+
+const columnsArray = [
+  { columnLabel: "Month", accessor: "month" },
+  {
+    columnLabel: "Total Invested",
+    accessor: "investedAmount",
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
+  },
+  {
+    columnLabel: "Monthly Return",
+    accessor: "interestReturns",
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
+  },
+  {
+    columnLabel: "Total Return",
+    accessor: "totalInterestReturns",
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
+  },
+  {
+    columnLabel: "Total Amount",
+    accessor: "totalAmount",
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
+  },
+];
+
 function renderProgression() {
   // Preventing my function to run if some filds contains error
   if (document.querySelector(".error")) {
@@ -186,31 +213,18 @@ buttonClear.addEventListener("click", clearForm);
 
 const finalMoneyChart = document.getElementById("final-money-distribution");
 const progressionChart = document.getElementById("progression");
-let progressionChartReference = {};
-let doughnutChartReference = {};
 
-const columnsArray = [
-  { columnLabel: "Month", accessor: "month" },
-  {
-    columnLabel: "Total Invested",
-    accessor: "investedAmount",
-    format: (numberInfo) => formatCurrencyToTable(numberInfo),
-  },
-  {
-    columnLabel: "Monthly Return",
-    accessor: "interestReturns",
-    format: (numberInfo) => formatCurrencyToTable(numberInfo),
-  },
-  {
-    columnLabel: "Total Return",
-    accessor: "totalInterestReturns",
-    format: (numberInfo) => formatCurrencyToTable(numberInfo),
-  },
-  {
-    columnLabel: "Total Amount",
-    accessor: "totalAmount",
-    format: (numberInfo) => formatCurrencyToTable(numberInfo),
-  },
-];
+const mainEl = document.querySelector("main");
+const carouselEl = document.getElementById("carousel");
+const btnNext = document.getElementById("slide-arrow-next");
+const btnPrevious = document.getElementById("slide-arrow-previous");
+
+btnNext.addEventListener("click", () => {
+  carouselEl.scrollLeft += mainEl.clientWidth;
+});
+
+btnPrevious.addEventListener("click", () => {
+  carouselEl.scrollLeft -= mainEl.clientWidth;
+});
 
 // createTable(columnsArray, tableItems, "results-table");
